@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>4 - Frameset Layout (Navigation + Welcome)</title>
+  <!--
+    Note: <frameset> and <frame> are deprecated in modern HTML, but used here as requested.
+    This single file uses data: URIs so no external files are required.
+  -->
+</head>
+
+<!-- Frameset defining two rows: top for navigation, bottom for welcome message -->
+<frameset rows="25%,75%">
+  <!-- Top frame with simple navigation links encoded in a data URI -->
+  <frame
+    name="navFrame"
+    src="data:text/html,
+      <html><head><meta charset='utf-8'><title>Nav</title></head>
+      <body><h3>Navigation</h3>
+      <ul>
+        <li><a href='#' target='_parent'>Home</a></li>
+        <li><a href='#' target='_parent'>About</a></li>
+        <li><a href='#' target='_parent'>Contact</a></li>
+      </ul></body></html>">
+  <!-- Bottom frame with welcome message -->
+  <frame
+    name="contentFrame"
+    src="data:text/html,
+      <html><head><meta charset='utf-8'><title>Welcome</title></head>
+      <body><h1>Welcome to My Website</h1>
+      <p>This area displays the main content.</p></body></html>">
+  <noframes>
+    <body>
+      <h1>Frames are not supported by your browser.</h1>
+    </body>
+  </noframes>
+</frameset>
+</html>

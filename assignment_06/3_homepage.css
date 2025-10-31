@@ -1,0 +1,37 @@
+/* 3-section homepage using Flexbox */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { display: flex; flex-direction: column; min-height: 100vh; font-family: Arial, sans-serif; }
+
+.header { background: #333; color: #fff; padding: 0.75rem; }
+.nav { display: flex; justify-content: space-around; }
+.nav a { color: #fff; text-decoration: none; padding: 0.25rem 0.5rem; }
+
+/* Main: three boxes horizontally aligned */
+.main {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  width: 30%;
+  text-align: center;
+  transition: transform .2s ease;
+}
+
+/* Hover rotate slightly */
+.box:hover { transform: rotate(2deg); }
+
+/* Footer fixed at bottom of document flow and full width */
+.footer { background: #222; color: #fff; text-align: center; padding: 1rem; }
+
+/* Responsive: keep balanced by stacking below 700px */
+@media (max-width: 700px) {
+  .main { flex-direction: column; }
+  .box { width: 90%; }
+}

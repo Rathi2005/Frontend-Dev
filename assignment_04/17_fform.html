@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>17 - Form (loads result in iframe)</title>
+</head>
+<body>
+  <h1>Form Page</h1>
+
+  <!-- Form that targets the iframe named "resultFrame" -->
+  <form action="17_result.html" method="get" target="resultFrame">
+    <label>
+      Enter text:<br>
+      <input type="text" name="sample" required>
+    </label>
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>Result (loads in the iframe below)</h2>
+  <iframe name="resultFrame" width="80%" height="200" title="Result Frame" frameborder="0"></iframe>
+</body>
+</html>
