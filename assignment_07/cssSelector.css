@@ -1,0 +1,14 @@
+/* Attribute selector */
+a[href^="https"] { color: blue; }
+input[type="text"] { background: #e0f7fa; }
+
+/* Pseudo-classes */
+li:nth-child(odd) { background: #f0f0f0; }
+a:hover { text-decoration: underline; }
+input:focus { border: 2px solid #0077b6; }
+
+/* Pseudo-elements */
+a::before { content: "🔗 "; }
+
+/* Combinators */
+ul > li { padding: 8px; }

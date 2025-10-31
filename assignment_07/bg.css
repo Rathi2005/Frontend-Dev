@@ -1,0 +1,33 @@
+body, html {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+header, footer {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: #111;
+  padding: 10px 0;
+}
+
+header { top: 0; }
+footer { bottom: 0; }
+
+section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.linear {
+  background: linear-gradient(135deg, #00b4d8, #48cae4);
+}
+
+.radial {
+  background: radial-gradient(circle, #ffafcc, #ff006e);
+  background-attachment: fixed;
+}
