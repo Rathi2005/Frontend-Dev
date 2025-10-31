@@ -1,0 +1,195 @@
+/* ---------- Global Styles ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background: #f9f9f9;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* ---------- Header ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(34, 139, 34, 0.9);
+  color: white;
+  padding: 15px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+nav a {
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ffe066;
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  position: relative;
+  height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 3em;
+  padding: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  outline: 3px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 8px;
+}
+
+/* ---------- About Section ---------- */
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10%;
+  gap: 40px;
+  background: #fff;
+}
+
+.about img {
+  width: 45%;
+  border-radius: 10px;
+  border: 5px solid rgba(34,139,34,0.3);
+}
+
+.about-text {
+  width: 50%;
+}
+
+.about-text h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #228b22;
+}
+
+/* ---------- Services Section ---------- */
+.services {
+  background: linear-gradient(to right, #e6f4ea, #f4fbe9);
+  padding: 60px 10%;
+  text-align: center;
+}
+
+.services h2 {
+  margin-bottom: 40px;
+  font-size: 2em;
+  color: #228b22;
+}
+
+.service-boxes {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  border: 2px solid rgba(34,139,34,0.3);
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.service:hover {
+  transform: translateY(-5px);
+}
+
+/* ---------- Contact Section ---------- */
+.contact {
+  padding: 60px 10%;
+  background: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.contact h2 {
+  color: #228b22;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input, textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.3);
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: #228b22;
+  box-shadow: 0 0 5px rgba(34,139,34,0.4);
+}
+
+button {
+  background: #228b22;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1a751a;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: rgba(34,139,34,0.9);
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  position: relative;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 800px) {
+  .about {
+    flex-direction: column;
+  }
+
+  .about img, .about-text {
+    width: 100%;
+  }
+
+  .service-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+}
