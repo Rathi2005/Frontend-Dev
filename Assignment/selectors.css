@@ -1,0 +1,25 @@
+/* Element selector */
+p {
+  margin: 10px 0;
+}
+/* ID selector */
+#intro {
+  color: blue;
+}
+/* Class selector */
+.highlight {
+  background: yellow;
+}
+/* Attribute selector */
+[title] {
+  border: 1px solid gray;
+  padding: 5px;
+}
+/* Descendant selector */
+div ul li {
+  color: green;
+}
+/* Adjacent sibling selector */
+ul + p {
+  color: red;
+}

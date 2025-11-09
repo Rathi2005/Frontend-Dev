@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f8f8f8;
+}
+.btn-container {
+  display: flex;
+  gap: 15px;
+}
+button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.primary { background: #007bff; color: white; }
+.primary:hover { background: #0056b3; }
+.secondary { background: #6c757d; color: white; }
+.outline { border: 2px solid #007bff; background: transparent; color: #007bff; }
+.outline:hover { background: #007bff; color: white; }
+button:focus { outline: 2px solid #000; }
+button:disabled { background: #ccc; cursor: not-allowed; }
