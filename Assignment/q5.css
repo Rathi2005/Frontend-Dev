@@ -1,0 +1,12 @@
+:root {
+    /* Override Bootstrap Primary Color */
+    --bs-primary: #6a5acd;   /* soft purple */
+
+    /* Custom font */
+    --bs-body-font-family: 'Poppins', sans-serif;
+}
+
+/* Optional: Improve Body Font */
+body {
+    font-family: var(--bs-body-font-family);
+}

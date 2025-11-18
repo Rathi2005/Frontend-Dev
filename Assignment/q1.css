@@ -1,0 +1,5 @@
+/* Hero full-screen section */
+.hero {
+    background: url('https://picsum.photos/1600/900') center/cover no-repeat;
+    height: 80vh;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications Dashboard</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-4">
+
+    <div class="card p-4 shadow-sm">
+
+        <h2 class="mb-4">User Notifications</h2>
+
+        <!-- Alerts -->
+        <div class="alert alert-success">✔ New message received</div>
+        <div class="alert alert-info">ℹ Tip: Enable 2FA for more security</div>
+        <div class="alert alert-danger">⚠ Warning: Account login attempt blocked</div>
+
+        <!-- Dismissible Alert -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            This is a dismissible alert!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Summary Well -->
+        <div class="bg-light border p-3 mt-4">
+            <h5>Summary</h5>
+            <p>You have 3 new alerts today. Keep track of important updates here.</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
