@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grocery Bill Calculator</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        padding: 20px;
+    }
+    .container {
+        max-width: 550px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        padding-bottom: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #aaa;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #218838;
+    }
+    .result {
+        margin-top: 20px;
+        background: #e7f7ff;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Grocery Bill Calculator</h2>
+
+    <!-- ITEM 1 -->
+    <label>Item 1 Price:</label>
+    <input type="number" id="price1" placeholder="Enter price">
+
+    <label>Item 1 Quantity:</label>
+    <input type="number" id="qty1" placeholder="Enter quantity">
+
+    <!-- ITEM 2 -->
+    <label>Item 2 Price:</label>
+    <input type="number" id="price2" placeholder="Enter price">
+
+    <label>Item 2 Quantity:</label>
+    <input type="number" id="qty2" placeholder="Enter quantity">
+
+    <!-- ITEM 3 -->
+    <label>Item 3 Price:</label>
+    <input type="number" id="price3" placeholder="Enter price">
+
+    <label>Item 3 Quantity:</label>
+    <input type="number" id="qty3" placeholder="Enter quantity">
+
+    <button onclick="calculateBill()">Calculate Bill</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateBill() {
+    let p1 = Number(document.getElementById("price1").value);
+    let q1 = Number(document.getElementById("qty1").value);
+
+    let p2 = Number(document.getElementById("price2").value);
+    let q2 = Number(document.getElementById("qty2").value);
+
+    let p3 = Number(document.getElementById("price3").value);
+    let q3 = Number(document.getElementById("qty3").value);
+
+    let total1 = p1 * q1;
+    let total2 = p2 * q2;
+    let total3 = p3 * q3;
+
+    let total = total1 + total2 + total3;
+    let finalAmount = total;
+
+    let discountMsg = "";
+
+    if (total > 1000) {
+        finalAmount = total - (total * 0.10);
+        discountMsg = "<strong>10% discount applied!</strong><br>";
+    }
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").innerHTML = `
+        <strong>Total Before Discount:</strong> ₹${total.toFixed(2)} <br>
+        ${discountMsg}
+        <strong>Final Amount to Pay:</strong> ₹${finalAmount.toFixed(2)}
+    `;
+}
+</script>
+
+</body>
+</html>

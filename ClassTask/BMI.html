@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple BMI Calculator (Beginner)</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    .box {
+      max-width: 350px;
+      background: white;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: blue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Simple Progress Bar */
+    .progress {
+      width: 100%;
+      height: 15px;
+      background: #ddd;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: green;
+      border-radius: 5px;
+      transition: 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>BMI Calculator</h2>
+
+    <label>Weight (kg):</label>
+    <input id="weight" type="number" placeholder="Enter weight" />
+
+    <label>Height (meters):</label>
+    <input id="height" type="number" placeholder="Enter height" />
+
+    <button onclick="calculateBMI()">Calculate</button>
+
+    <div class="result" id="result"></div>
+
+    <div class="progress">
+      <div class="progress-fill" id="bar"></div>
+    </div>
+  </div>
+
+<script>
+  function calculateBMI() {
+    let weight = parseFloat(document.getElementById("weight").value);
+    let height = parseFloat(document.getElementById("height").value);
+    let result = document.getElementById("result");
+    let bar = document.getElementById("bar");
+
+    if (!weight || !height) {
+      result.innerHTML = "Please enter both values";
+      bar.style.width = "0%";
+      return;
+    }
+
+    let bmi = weight / (height * height);
+    let category = "";
+
+    if (bmi < 18.5) category = "Underweight";
+    else if (bmi < 25) category = "Normal";
+    else if (bmi < 30) category = "Overweight";
+    else category = "Obese";
+
+    result.innerHTML = "BMI: " + bmi.toFixed(2) + " (" + category + ")";
+
+    // Simple progress bar (BMI out of 40 max)
+    let percent = (bmi / 40) * 100;
+    if (percent > 100) percent = 100;
+
+    bar.style.width = percent + "%";
+  }
+</script>
+
+</body>
+</html>
