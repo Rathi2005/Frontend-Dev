@@ -15,3 +15,4 @@ console.table([
   { label: "Null", value: x, type: "null" },
   { label: "Undefined", value: y, type: typeof y },
 ]);
+ 
