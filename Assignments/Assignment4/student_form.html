@@ -1,0 +1,108 @@
+<!-- student_form.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q2 Student Form Validator</title>
+  <style>
+    form { max-width: 420px; margin: 24px; font-family: Arial; }
+    input { display:block; width:100%; padding:8px; margin-bottom:6px; box-sizing:border-box; }
+    .error { border: 2px solid #e74c3c; }
+    .valid { border: 2px solid #2ecc71; }
+    .msg { font-size:0.9rem; color:#e74c3c; height:18px }
+    .msg.valid { color:#2ecc71 }
+  </style>
+</head>
+<body>
+  <form id="studentForm" novalidate>
+    <h2>Student Registration</h2>
+    <label>Name</label><input id="name" type="text" />
+    <div id="nameMsg" class="msg"></div>
+
+    <label>Email</label><input id="email" type="email" />
+    <div id="emailMsg" class="msg"></div>
+
+    <label>Phone</label><input id="phone" type="text" />
+    <div id="phoneMsg" class="msg"></div>
+
+    <label>Password</label><input id="password" type="password" />
+    <div id="passwordMsg" class="msg"></div>
+
+    <button type="submit">Register</button>
+    <div id="result" style="margin-top:12px;"></div>
+  </form>
+
+  <script>
+    "use strict";
+    // Regex rules
+    const nameRegex = /^[A-Za-z\s]+$/;               // alphabets + spaces
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email
+    const phoneRegex = /^\d{10}$/;                   // exactly 10 digits
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}$/;
+    // Note: password requires 1 uppercase, 1 number, 1 special char, min-length 6 (can change)
+
+    const form = document.getElementById('studentForm');
+    const fields = {
+      name: document.getElementById('name'),
+      email: document.getElementById('email'),
+      phone: document.getElementById('phone'),
+      password: document.getElementById('password')
+    };
+    const msgs = {
+      name: document.getElementById('nameMsg'),
+      email: document.getElementById('emailMsg'),
+      phone: document.getElementById('phoneMsg'),
+      password: document.getElementById('passwordMsg'),
+      result: document.getElementById('result')
+    };
+
+    function validateField(fieldName) {
+      const value = fields[fieldName].value.trim();
+      let ok = false;
+      let message = '';
+
+      if (fieldName === 'name') {
+        ok = nameRegex.test(value);
+        message = ok ? 'Looks good' : 'Name must contain alphabets only';
+      } else if (fieldName === 'email') {
+        ok = emailRegex.test(value);
+        message = ok ? 'Valid email' : 'Invalid email format';
+      } else if (fieldName === 'phone') {
+        ok = phoneRegex.test(value);
+        message = ok ? 'Valid phone' : 'Phone must be exactly 10 digits';
+      } else if (fieldName === 'password') {
+        ok = passwordRegex.test(value);
+        message = ok ? 'Strong password' : 'Password needs 1 uppercase, 1 number, 1 special char';
+      }
+
+      fields[fieldName].classList.toggle('valid', ok);
+      fields[fieldName].classList.toggle('error', !ok);
+      msgs[fieldName].textContent = message;
+      msgs[fieldName].classList.toggle('valid', ok);
+
+      return ok;
+    }
+
+    // Live validation on blur
+    Object.keys(fields).forEach(k => fields[k].addEventListener('blur', () => validateField(k)));
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // validate all
+      const allOk = Object.keys(fields).every(k => validateField(k));
+      if (allOk) {
+        msgs.result.style.color = 'green';
+        msgs.result.textContent = 'Registration successful!';
+        console.log('Student registered:', {
+          name: fields.name.value.trim(),
+          email: fields.email.value.trim(),
+          phone: fields.phone.value.trim()
+        });
+      } else {
+        msgs.result.style.color = 'red';
+        msgs.result.textContent = 'Please fix errors above.';
+      }
+    });
+  </script>
+</body>
+</html>

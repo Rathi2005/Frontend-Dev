@@ -1,0 +1,49 @@
+<!-- login_form.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q7 Login Validation</title>
+  <style>
+    body{font-family:Arial;padding:16px}
+    input{display:block;margin-bottom:8px;padding:6px;width:300px}
+    .error{color:#e74c3c}
+    .success{color:#2ecc71}
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input id="username" placeholder="Username" />
+    <input id="pwd" placeholder="Password" type="password" />
+    <button type="submit">Login</button>
+  </form>
+  <div id="out"></div>
+
+  <script>
+    "use strict";
+
+    const usernameMinLen = 5;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const out = document.getElementById('out');
+      out.innerHTML = '';
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('pwd').value;
+
+      const errors = [];
+      if (username.length < usernameMinLen) errors.push('Username must be at least 5 characters.');
+      if (!passwordRegex.test(password)) errors.push('Password must be at least 8 characters and include uppercase, lowercase, number, special char.');
+
+      if (errors.length) {
+        out.innerHTML = '<div class="error">' + errors.join('<br/>') + '</div>';
+      } else {
+        out.innerHTML = '<div class="success">Login validation successful!</div>';
+        console.log('Login passed for user:', username);
+      }
+    });
+  </script>
+</body>
+</html>

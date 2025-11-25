@@ -1,0 +1,60 @@
+<!-- dynamic_user_editor.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q8 Dynamic Object Updater</title>
+  <style>
+    body{font-family:Arial;padding:18px}
+    input{display:block;margin-bottom:8px;padding:6px;width:320px}
+    pre{background:#f4f4f4;padding:8px}
+  </style>
+</head>
+<body>
+  <h2>Edit User</h2>
+  <form id="userForm">
+    <label>Name</label><input id="name" />
+    <label>Email</label><input id="email" />
+    <label>Age</label><input id="age" />
+    <button type="submit">Update</button>
+  </form>
+
+  <h3>Current user object</h3>
+  <pre id="userDisplay"></pre>
+
+  <script>
+    "use strict";
+
+    // initial user object
+    const user = { name: "John", email: "john@mail.com", age: 21 };
+
+    const userDisplay = document.getElementById('userDisplay');
+    function renderUser() {
+      userDisplay.textContent = JSON.stringify(user, null, 2);
+    }
+    renderUser();
+
+    // Pre-fill form with current values
+    document.getElementById('name').value = user.name;
+    document.getElementById('email').value = user.email;
+    document.getElementById('age').value = user.age;
+
+    // Real-time updates on input
+    document.getElementById('userForm').addEventListener('input', function(e) {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const ageVal = Number(document.getElementById('age').value);
+      user.name = name;
+      user.email = email;
+      if (!Number.isNaN(ageVal)) user.age = ageVal;
+      renderUser();
+    });
+
+    // On submit, prevent reload and console.log
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      console.log('Updated user object:', user);
+    });
+  </script>
+</body>
+</html>

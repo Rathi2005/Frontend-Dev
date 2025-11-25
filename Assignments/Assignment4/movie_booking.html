@@ -1,0 +1,58 @@
+
+<!-- movie_booking.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q5 Movie Ticket Booking</title>
+  <style>
+    body{font-family:Arial;padding:16px}
+    input{display:block;margin-bottom:8px;padding:6px;width:300px}
+    .error{color:#e74c3c}
+    .success{color:#2ecc71}
+  </style>
+</head>
+<body>
+  <h2>Book Movie Ticket</h2>
+  <form id="bookingForm">
+    <input id="name" placeholder="Name" />
+    <input id="email" placeholder="Email" />
+    <input id="seats" placeholder="Number of seats (1-10)" />
+    <button type="submit">Book</button>
+  </form>
+
+  <div id="out"></div>
+
+  <script>
+    "use strict";
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const form = document.getElementById('bookingForm');
+    const out = document.getElementById('out');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      out.innerHTML = '';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const seatsRaw = document.getElementById('seats').value.trim();
+      const seats = Number(seatsRaw);
+
+      const errors = [];
+      if(!nameRegex.test(name)) errors.push('Name must contain alphabets only.');
+      if(!emailRegex.test(email)) errors.push('Invalid email.');
+      if(!Number.isInteger(seats) || seats < 1 || seats > 10) errors.push('Seats must be an integer between 1 and 10.');
+
+      if(errors.length){
+        out.innerHTML = '<div class="error">' + errors.join('<br/>') + '</div>';
+      } else {
+        const booking = { name, email, seats };
+        out.innerHTML = '<div class="success">Booking successful!</div><pre>' + JSON.stringify(booking, null, 2) + '</pre>';
+        console.log('Ticket booked:', booking);
+      }
+    });
+  </script>
+</body>
+</html>

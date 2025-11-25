@@ -1,0 +1,82 @@
+<!-- form_builder.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q4 Custom Form Builder</title>
+  <style>
+    body{font-family:Arial;padding:18px}
+    form{max-width:480px}
+    label{display:block;margin-top:8px}
+    input, select, textarea{width:100%;padding:8px;margin-top:4px}
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    "use strict";
+
+    // FormBuilder class creates a form from a fields array and handles submission
+    class FormBuilder {
+      constructor(fields = [], containerId = 'app') {
+        this.fields = fields;
+        this.container = document.getElementById(containerId);
+        this.formId = 'dynamicForm';
+      }
+
+      // Render form markup
+      render() {
+        const formHtml = [];
+        formHtml.push(`<form id="${this.formId}" novalidate>`);
+        this.fields.forEach(field => {
+          const name = field.name || field.label.toLowerCase().replace(/\s+/g, '_');
+          if (field.type === 'textarea') {
+            formHtml.push(`<label>${field.label}</label><textarea name="${name}"></textarea>`);
+          } else if (field.type === 'select') {
+            const options = (field.options || []).map(o => `<option value="${o.value}">${o.label}</option>`).join('');
+            formHtml.push(`<label>${field.label}</label><select name="${name}">${options}</select>`);
+          } else {
+            formHtml.push(`<label>${field.label}</label><input type="${field.type}" name="${name}" />`);
+          }
+        });
+        formHtml.push('<button type="submit">Submit</button></form>');
+        this.container.innerHTML = formHtml.join('');
+        this.attachSubmit();
+      }
+
+      // Return form data as an object
+      getFormData() {
+        const form = document.getElementById(this.formId);
+        const formData = {};
+        new FormData(form).forEach((val, key) => formData[key] = val);
+        return formData;
+      }
+
+      attachSubmit() {
+        const form = document.getElementById(this.formId);
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const data = this.getFormData();
+          console.log('Form submitted:', data);
+          const pre = document.createElement('pre');
+          pre.textContent = JSON.stringify(data, null, 2);
+          this.container.appendChild(pre);
+        });
+      }
+    }
+
+    // Example usage
+    const fields = [
+      { type: 'text', label: 'Username', name: 'username' },
+      { type: 'email', label: 'Email', name: 'email' },
+      { type: 'password', label: 'Password', name: 'password' },
+      { type: 'select', label: 'Role', name: 'role', options: [{value:'user',label:'User'},{value:'admin',label:'Admin'}] },
+      { type: 'textarea', label: 'Bio', name: 'bio' }
+    ];
+
+    const formBuilder = new FormBuilder(fields, 'app');
+    formBuilder.render();
+  </script>
+</body>
+</html>
