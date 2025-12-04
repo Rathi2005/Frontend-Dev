@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+</head>
+<body>
+  <section id="products">
+    <div class="product" data-stock="in">
+      <h3>P1</h3><span class="fav">♥</span>
+      <p class="details">Details 1</p>
+    </div>
+
+    <div class="product" data-stock="out" discount="true">
+      <h3>P2</h3><span class="fav">♥</span>
+      <p class="details">Details 2</p>
+    </div>
+
+    <div class="product" discount="true">
+      <h3>P3</h3><span class="fav">♥</span>
+      <p class="details">Details 3</p>
+    </div>
+
+    <div class="product" data-stock="in">
+      <h3>P4</h3><span class="fav">♥</span>
+      <p class="details">Details 4</p>
+    </div>
+
+    <div class="product" data-stock="out">
+      <h3>P5</h3><span class="fav">♥</span>
+      <p class="details">Details 5</p>
+    </div>
+  </section>
+
+  <style>
+    .highlight { background: yellow; }
+    .selected { color: red; }
+    [discount="true"] { border: 2px dashed orange; }
+    .details { display: none; }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="products.js"></script>
+</body>
+</html>
