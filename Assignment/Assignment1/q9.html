@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Q9 - Form Validation</title>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    .error { color:red; font-size:0.9rem; }
+    .invalid { border:1px solid red; }
+    #successMsg { color:green; margin-top:12px; display:none; }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="regForm" novalidate>
+    <div>
+      <label>Name: <input type="text" id="nameField"></label>
+      <div id="nameErr" class="error"></div>
+    </div>
+    <div>
+      <label>Email: <input type="email" id="emailField"></label>
+      <div id="emailErr" class="error"></div>
+    </div>
+    <div>
+      <label>Password: <input type="password" id="passwordField"></label>
+      <div id="passwordErr" class="error"></div>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+  <div id="successMsg">Form Submitted Successfully</div>
+
+  <script src="q9.js"></script>
+</body>
+</html>

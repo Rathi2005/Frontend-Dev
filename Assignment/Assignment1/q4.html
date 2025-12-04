@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Q4 - Theme Switcher</title>
+  <style>
+    body[data-theme="light"] { background:#fff; color:#000; }
+    body[data-theme="dark"]  { background:#111; color:#eee; }
+    body[data-theme="blue"]  { background:#e7f0ff; color:#003366; }
+    button { margin:4px; }
+  </style>
+</head>
+<body data-theme="light">
+  <h2>Theme Switcher</h2>
+  <button data-theme-choice="light">Light</button>
+  <button data-theme-choice="dark">Dark</button>
+  <button data-theme-choice="blue">Blue</button>
+
+  <script src="q4.js"></script>
+</body>
+</html>

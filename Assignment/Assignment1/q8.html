@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Q8 - Custom Dropdown</title>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    .dropdown { position:relative; display:inline-block; }
+    .options { position:absolute; top:100%; left:0; border:1px solid #ccc; background:#fff; display:none; min-width:160px; z-index:10;}
+    .option { padding:8px; cursor:pointer; }
+    .option:hover { background:#f0f0f0; }
+    .open .options { display:block; }
+  </style>
+</head>
+<body>
+  <h2>Custom Dropdown</h2>
+
+  <div class="dropdown" id="customDropdown">
+    <button id="dropdownBtn" aria-haspopup="listbox">Choose an option</button>
+    <div class="options" role="listbox" id="optionsList">
+      <div class="option" data-value="1">Option One</div>
+      <div class="option" data-value="2">Option Two</div>
+      <div class="option" data-value="3">Option Three</div>
+      <div class="option" data-value="4">Option Four</div>
+      <div class="option" data-value="5">Option Five</div>
+    </div>
+  </div>
+
+  <script src="q8.js"></script>
+</body>
+</html>

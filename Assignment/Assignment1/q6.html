@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Q6 - Student Table Filter</title>
+  <style>
+    body{font-family:Arial;padding:20px;}
+    table { width:100%; border-collapse:collapse; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+    .no-results { color: red; display:none; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <h2>Student Table</h2>
+  <input id="searchBox" placeholder="Search by name, branch or cgpa" />
+  <table id="studentsTable">
+    <thead><tr><th>Name</th><th>Branch</th><th>CGPA</th></tr></thead>
+    <tbody>
+      <tr><td>Alice</td><td>CSE</td><td>9.1</td></tr>
+      <tr><td>Bob</td><td>ME</td><td>8.2</td></tr>
+      <tr><td>Charlie</td><td>EE</td><td>7.6</td></tr>
+      <tr><td>Dana</td><td>CSE</td><td>8.9</td></tr>
+      <tr><td>Eve</td><td>CE</td><td>8.0</td></tr>
+    </tbody>
+  </table>
+  <div id="noResults" class="no-results">No results found</div>
+
+  <script src="q6.js"></script>
+</body>
+</html>
