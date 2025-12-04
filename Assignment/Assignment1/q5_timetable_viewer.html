@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q5 Timetable Viewer</title>
+  <style>
+    body{font-family:Arial;padding:20px}
+    .class{padding:10px;border:1px solid #eee;margin-bottom:8px;border-radius:6px}
+    .empty{color:#666}
+  </style>
+</head>
+<body>
+  <h2>College Timetable</h2>
+  <select id="day">
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
+
+  <div id="list" style="margin-top:16px"></div>
+
+<script>
+  const base = 'http://localhost:3005/timetable';
+  const daySelect = document.getElementById('day');
+  const list = document.getElementById('list');
+
+  function load(day){
+    list.innerHTML = 'Loading...';
+    fetch(`${base}?day=${encodeURIComponent(day)}`)
+      .then(resp => {
+        if (!resp.ok) throw new Error('Failed to load');
+        return resp.json();
+      })
+      .then(data => {
+        if (!data || data.length === 0) {
+          list.innerHTML = '<div class="empty">No classes today.</div>';
+          return;
+        }
+        list.innerHTML = data.map(c => `
+          <div class="class">
+            <div><strong>${c.subject}</strong> — ${c.time}</div>
+            <div>Faculty: ${c.faculty}</div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        list.innerHTML = '<div class="empty">Error loading timetable.</div>';
+      });
+  }
+
+  daySelect.addEventListener('change', ()=> load(daySelect.value));
+  // initial
+  load(daySelect.value);
+</script>
+</body>
+</html>

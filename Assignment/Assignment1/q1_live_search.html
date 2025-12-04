@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q1 Live Search</title>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <style>
+    body{font-family: Arial; padding:20px}
+    .result{display:flex; gap:10px; align-items:center; padding:8px; border-bottom:1px solid #eee}
+    .no-results{color:#888; padding:10px}
+    .loader{display:none}
+    img{width:60px; height:60px; object-fit:cover; border-radius:6px}
+  </style>
+</head>
+<body>
+  <h2>Live Product Search</h2>
+  <input id="search" placeholder="Search products..." autofocus />
+  <div class="loader">Loading...</div>
+  <div id="results"></div>
+
+  <script>
+    $(function(){
+      let timer=null;
+      $('#search').on('input', function(){
+        const q = $(this).val().trim();
+        clearTimeout(timer);
+        timer = setTimeout(() => performSearch(q), 200);
+      });
+
+      function performSearch(q){
+        $('.loader').show();
+        $('#results').empty();
+        $.ajax({
+          url: 'http://localhost:3001/products',
+          data: q ? { q } : {},
+          method: 'GET',
+          success: function(data){
+            $('.loader').hide();
+            if (!data || data.length === 0) {
+              $('#results').html('<div class="no-results">No products found</div>');
+              return;
+            }
+            const html = data.map(p => `
+              <div class="result">
+                <img src="${p.image}" alt="${p.name}">
+                <div>
+                  <div><strong>${p.name}</strong></div>
+                  <div>₹ ${p.price}</div>
+                </div>
+              </div>`).join('');
+            $('#results').html(html);
+          },
+          error: function(){
+            $('.loader').hide();
+            $('#results').html('<div class="no-results">Error loading products</div>');
+          }
+        });
+      }
+
+      // initial load (all)
+      performSearch('');
+    });
+  </script>
+</body>
+</html>

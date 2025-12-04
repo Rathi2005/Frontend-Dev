@@ -1,0 +1,9 @@
+{
+  "tasks": [
+    { "id": 1, "title": "Finish report", "priority": "High", "completed": false },
+    { "id": 2, "title": "Email client", "priority": "Medium", "completed": true },
+    { "id": 3, "title": "Buy groceries", "priority": "Low", "completed": false },
+    { "id": 4, "title": "Fix bug #224", "priority": "High", "completed": false },
+    { "id": 5, "title": "Team meeting prep", "priority": "Medium", "completed": true }
+  ]
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Q4 Multi-API Dashboard</title>
+  <style>
+    body{font-family:Arial;padding:20px}
+    .card{display:inline-block;padding:20px;margin:10px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08);width:180px}
+    .skeleton{height:20px;background:#eee;border-radius:4px; margin-bottom:8px}
+    .warn{color:darkorange}
+  </style>
+</head>
+<body>
+  <h2>Multi-API Dashboard</h2>
+  <div id="warning" class="warn"></div>
+  <div id="dashboard">
+    <div class="card"><div id="users"><div class="skeleton" style="width:80%"></div></div></div>
+    <div class="card"><div id="orders"><div class="skeleton" style="width:60%"></div></div></div>
+    <div class="card"><div id="products"><div class="skeleton" style="width:70%"></div></div></div>
+  </div>
+
+<script>
+  const base = 'http://localhost:3004';
+  const endpoints = [
+    { key: 'users', url: `${base}/users` },
+    { key: 'orders', url: `${base}/orders` },
+    { key: 'products', url: `${base}/products` }
+  ];
+
+  // wrap fetch to always resolve with status object so Promise.all never rejects
+  function safeFetch(url){
+    return fetch(url).then(resp => {
+      if (!resp.ok) return { ok: false, error: `HTTP ${resp.status}` };
+      return resp.json().then(data => ({ ok: true, data }));
+    }).catch(err => ({ ok: false, error: err.message }));
+  }
+
+  // Promise.all of safeFetch (still uses Promise.all as required)
+  const promises = endpoints.map(e => safeFetch(e.url));
+
+  Promise.all(promises).then(results => {
+    let anyFail = false;
+
+    // users
+    const usersRes = results[0];
+    if (usersRes.ok) document.getElementById('users').innerHTML = `<h3>Users</h3><div>${usersRes.data.length}</div>`;
+    else { document.getElementById('users').innerHTML = `<h3>Users</h3><div>—</div>`; anyFail = true; }
+
+    // orders
+    const ordersRes = results[1];
+    if (ordersRes.ok) document.getElementById('orders').innerHTML = `<h3>Orders</h3><div>${ordersRes.data.length}</div>`;
+    else { document.getElementById('orders').innerHTML = `<h3>Orders</h3><div>—</div>`; anyFail = true; }
+
+    // products
+    const productsRes = results[2];
+    if (productsRes.ok) document.getElementById('products').innerHTML = `<h3>Products</h3><div>${productsRes.data.length}</div>`;
+    else { document.getElementById('products').innerHTML = `<h3>Products</h3><div>—</div>`; anyFail = true; }
+
+    if (anyFail) document.getElementById('warning').textContent = 'Warning: Some data could not be loaded.';
+  });
+</script>
+</body>
+</html>
